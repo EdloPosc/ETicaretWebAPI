@@ -1,0 +1,26 @@
+﻿using ETicaret.EntityLayer.Concretes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace ETicaret.DataAccessLayer.Mappings
+{
+    public class CategoryMap : IEntityTypeConfiguration<Category>
+    {
+        public void Configure(EntityTypeBuilder<Category> builder)
+        {
+
+            builder.Property(x => x.CategoryId).IsRequired();
+            builder.Property(x => x.SortKey).HasDefaultValue(0);
+            builder.Property(x => x.CategoryStatus).HasDefaultValue(false);
+            builder.Property(x => x.CategoryName).HasColumnType("nvarchar").HasMaxLength(100).IsRequired();
+
+            builder.HasData(new Category
+            {
+                CategoryId = 1,
+                CategoryStatus=true,
+                CategoryName="Elektronik",
+                SortKey =1
+            });
+        }
+    }
+}
